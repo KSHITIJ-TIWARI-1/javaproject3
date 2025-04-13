@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        
+        .counter-container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter-value {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: #333;
+        }
+        
+        .counter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .decrement {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .reset {
+            background-color: #adb5bd;
+            color: white;
+        }
+        
+        .increment {
+            background-color: #51cf66;
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-container">
+        <h1>Counter App</h1>
+        <div class="counter-value" id="counter">0</div>
+        <div class="counter-buttons">
+            <button class="decrement" id="decrement">Decrease</button>
+            <button class="reset" id="reset">Reset</button>
+            <button class="increment" id="increment">Increase</button>
+        </div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const counterElement = document.getElementById('counter');
+        const incrementBtn = document.getElementById('increment');
+        const decrementBtn = document.getElementById('decrement');
+        const resetBtn = document.getElementById('reset');
+        
+        // Initialize counter value
+        let count = 0;
+        
+        // Update counter display
+        function updateCounter() {
+            counterElement.textContent = count;
+            
+            // Change color based on value
+            if (count > 0) {
+                counterElement.style.color = '#2b8a3e';
+            } else if (count < 0) {
+                counterElement.style.color = '#c92a2a';
+            } else {
+                counterElement.style.color = '#333';
+            }
+        }
+        
+        // Event listeners
+        incrementBtn.addEventListener('click', () => {
+            count++;
+            updateCounter();
+        });
+        
+        decrementBtn.addEventListener('click', () => {
+            count--;
+            updateCounter();
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            updateCounter();
+        });
+        
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                count++;
+                updateCounter();
+            } else if (e.key === 'ArrowDown') {
+                count--;
+                updateCounter();
+            } else if (e.key === 'r' || e.key === 'R') {
+                count = 0;
+                updateCounter();
+            }
+        });
+        
+        // Initialize
+        updateCounter();
+    </script>
+</body>
+</html>
